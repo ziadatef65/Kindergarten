@@ -34,3 +34,9 @@ class UserUpdateLoading extends KindergartenStates{}
 //
 class ContainerOfVideoOpen extends KindergartenStates{}
 //
+class NextQuestionState extends KindergartenStates{}
+class FinishQuizState extends KindergartenStates{}
+class ZeroIndex extends KindergartenStates{}
+//
+class changeState extends KindergartenStates{}
+

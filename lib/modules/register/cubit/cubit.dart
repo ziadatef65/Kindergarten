@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/models/user_model.dart';
 import 'package:kindergarten1/modules/register/cubit/states.dart';
 import 'package:kindergarten1/shared/components/constants.dart';
@@ -34,6 +35,7 @@ class RegisterCubit extends Cubit<RegisterStates>{
           gender: gender,
           userId: value.user!.uid,
       );
+      userId = value.user!.uid;
     }).catchError((error){
       emit(RegisterErrorState(error.toString()));
     });
@@ -60,12 +62,15 @@ void userCreate({
     userId: userId,
     email: email,
     image: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
-
+    isAdmin: false,
   );
 FirebaseFirestore.instance
     .collection('users')
     .doc(userId).set(model.toMap()).then((value) {
-emit(CreateUserSuccessState());
+
+emit(CreateUserSuccessState(userId));
+
+
 }).catchError((error){
   emit(CreateUserErrorState(error.toString()));
 });

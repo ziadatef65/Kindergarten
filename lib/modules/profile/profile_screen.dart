@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
+import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
 import 'package:kindergarten1/shared/components/components.dart';
 
 import '../../layout/cubit/states.dart';
@@ -54,20 +55,20 @@ class ProfileScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Text('Father Name:  ',style:GoogleFonts.cairo(fontSize: 24),),
+                                        Text('Father Name: ',style:GoogleFonts.cairo(fontSize: 24,color: Colors.amber),),
                                         Text('${userModel!.childFullName!.split(" ").elementAt(1).toUpperCase()}',style:GoogleFonts.cairo(fontSize:18,)),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text('Child Name:  ',style:GoogleFonts.cairo(fontSize: 24),),
+                                        Text('Child Name: ',style:GoogleFonts.cairo(fontSize: 24,color: Colors.amber),),
                                         Text('${userModel!.childFullName!.split(" ").elementAt(0).toUpperCase()}',style:GoogleFonts.cairo(fontSize:20,)),
                                       ],
                                     ),
                                     Row(
                                       children: [
-                                        Text('Email:  ',style:GoogleFonts.cairo(fontSize: 24),),
-                                        Text('${userModel!.email}',style:GoogleFonts.cairo(fontSize:20,)),
+                                        Text('Email: ',style:GoogleFonts.cairo(fontSize: 24,color: Colors.amber),),
+                                        Container(height: 40,width:200,child: Tooltip(message: '${userModel!.email}' ,child: Text('${userModel!.email}',overflow: TextOverflow.ellipsis,style:GoogleFonts.cairo(fontSize:20,)))),
                                       ],
                                     ),
                                   ],

@@ -5,6 +5,8 @@ class UserModel {
   String? userId;
   String? age;
   String? image;
+  bool? isAdmin;
+
 
   UserModel({
     this.image,
@@ -13,6 +15,8 @@ class UserModel {
     this.age,
     this.gender,
     this.userId,
+    this.isAdmin,
+
   });
 
   UserModel.fromJson(Map<dynamic, dynamic> json) {
@@ -22,6 +26,8 @@ class UserModel {
     gender = json['gender'];
     userId = json['userId'];
     image = json['image'];
+    isAdmin = json['isAdmin'];
+
   }
 
 
@@ -34,6 +40,8 @@ class UserModel {
       'gender':gender,
       'userId':userId,
       'image':image,
+      'isAdmin':isAdmin,
+
     };
   }
 

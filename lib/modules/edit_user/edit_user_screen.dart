@@ -150,17 +150,20 @@ class EditUserScreen extends StatelessWidget {
                                               color: CupertinoColors.white,
                                             ),),
                                             Container(
-                                              width: 100,
-                                              child: Text(
-                                                ' ${userModel!.childFullName}',
-                                                overflow: TextOverflow.fade,
-                                                softWrap: false,
-                                                style: GoogleFonts.cairo(
+                                              width:81,
+                                              child: Tooltip(
+                                                message: '${userModel!.childFullName}',
+                                                child: Text(
+                                                  ' ${userModel!.childFullName}',
+                                                  overflow: TextOverflow.ellipsis,
 
-                                                fontSize: 16,
-                                                color: CupertinoColors.white,
-                                              ),
+                                                  style: GoogleFonts.cairo(
+
+                                                  fontSize: 16,
+                                                  color: CupertinoColors.white,
+                                                ),
                                   ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -308,7 +311,6 @@ class EditUserScreen extends StatelessWidget {
                                                   if(formKey.currentState!.validate())
                                                     {
                                                       cubit.updateUser(name: nameController.text, gender: genderController.text, age: ageController.text);
-
                                                     }
                                                 },
                                                 child:Text('Update Info',style: GoogleFonts.cairo(color:Colors.white,fontSize: 20 ),)

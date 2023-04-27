@@ -1,17 +1,16 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
-import 'package:kindergarten1/modules/courses/courses_screen.dart';
-import 'package:kindergarten1/modules/on_boarding/on_boarding_screen2.dart';
+import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
 import 'package:kindergarten1/modules/selected_course_screen/selected_course_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../shared/components/components.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +83,11 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(width: 13,)
                   ],
                 ),
-
-               SizedBox(
+                SizedBox(
                  height: 450,
                  width: 400,
                  child: PageView.builder(
-                   physics: BouncingScrollPhysics(),
+                   physics: const BouncingScrollPhysics(),
                    controller: cubit.boardController,
                    onPageChanged: (int index){
                      cubit.onPageChanged(index);
@@ -153,9 +151,6 @@ class HomeScreen extends StatelessWidget {
                    ),
                  ),
                ),
-
-
-
                 const SizedBox(
                   height: 20,
                 ),
@@ -204,25 +199,31 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
+                      if (AdminCubit.get(context).course.length > 0)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
+
+                        child: SizedBox(
                           height: 360,
+
                           child: ListView.separated(
                               itemBuilder: (context,index){
                                 return courseItem(
                                   onTap: (){
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SelectedCourseScreen('${cubit.coursesList[index].nameOfCourse}','${cubit.coursesList[index].imageOfCourse}',cubit.coursesList[index].colorOfCourse)));
+                                    AdminCubit.get(context).getUrls(AdminCubit.get(context).course[index].nameOfCourse);
+                                    AdminCubit.get(context).getDescription(AdminCubit.get(context).course[index].nameOfCourse);
+                                    if(AdminCubit.get(context).urls.isNotEmpty)
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SelectedCourseScreen('${AdminCubit.get(context).course[index].nameOfCourse}','${AdminCubit.get(context).course[index].image}',cubit.coursesList[index].colorOfCourse)));
                                   },
                                     colorOfCourseItem: cubit.coursesList[index].colorOfCourse,
-                                    nameOfCourse: cubit.coursesList[index].nameOfCourse,
-                                    imageOfCourse: cubit.coursesList[index].imageOfCourse,
+                                    nameOfCourse: AdminCubit.get(context).course[index].nameOfCourse!,
+                                    imageOfCourse: AdminCubit.get(context).course[index].image!,
                                 );
                               },
                               separatorBuilder:(context,index)=> const SizedBox(
                                 height: 40,
                               ),
-                              itemCount: cubit.coursesList.length,
+                              itemCount: AdminCubit.get(context).course.length,
                           ),
                         ),
                       ),

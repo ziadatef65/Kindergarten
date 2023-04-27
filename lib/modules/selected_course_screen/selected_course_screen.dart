@@ -5,12 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
-import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
+import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
+import 'package:kindergarten1/modules/quiz/quiz_screen.dart';
 import 'package:kindergarten1/modules/selected_video_screen/selected_course_screen.dart';
 import 'package:line_icons/line_icon.dart';
-import 'package:video_player/video_player.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
 import '../edit_user/edit_user_screen.dart';
 
 class SelectedCourseScreen extends StatelessWidget {
@@ -22,6 +20,7 @@ class SelectedCourseScreen extends StatelessWidget {
     this.nameOfCourse,
     this.imageOfCourse,
     this.colorOfCourse,
+
   );
 
   @override
@@ -102,39 +101,109 @@ class SelectedCourseScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        nameOfCourse,
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
+
+                        Text(
+                          nameOfCourse,
+                          style: GoogleFonts.poppins(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+
                       const SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
-                      Material(
-                          elevation: 10,
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            height: 230,
-                            width: 330,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                image: DecorationImage(
-                                    image: AssetImage('${imageOfCourse}'),
-                                    fit: BoxFit.cover)),
-                          )),
+
+                        Material(
+                            elevation: 10,
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              height: 230,
+                              width: 330,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                      image: NetworkImage('$imageOfCourse'),
+                                      fit: BoxFit.cover)),
+                            )),
+
                       const SizedBox(
                         height: 20,
                       ),
                       Expanded(
                         child: ListView.separated(
-                    itemBuilder: (context,index){
-                        return  Column(children: [
-                          Material(
-                            elevation: 10,
-                            borderRadius: BorderRadius.circular(6),
-                            child: Container(
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Material(
+                                  elevation: 10,
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Container(
+                                    height: 65,
+                                    decoration: BoxDecoration(
+                                        color: CupertinoColors.white,
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(6)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10,
+                                          bottom: 10,
+                                          left: 30,
+                                          right: 5),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Video-${index + 1}',
+                                            style: GoogleFonts.cairo(
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          IconButton(
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_right),
+                                            onPressed: () {
+                                              {
+                                                print(index);
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SelectedVideoScreen(
+                                                              AdminCubit.get(
+                                                                      context).urls?[index],
+                                                              colorOfCourse,
+                                                              index,
+                                                              nameOfCourse,
+                                                            )));
+                                              }
+
+                                            },
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 12,
+                            );
+                          },
+                          itemCount: AdminCubit.get(context).urls.length-1,
+                        ),
+                      ),
+
+                      if(nameOfCourse != 'Arabic alphabet')
+                        Material(
+                          elevation: 10,
+                          borderRadius: BorderRadius.circular(6),
+                          child: Container(
                               height: 65,
                               decoration: BoxDecoration(
                                   color: CupertinoColors.white,
@@ -146,35 +215,27 @@ class SelectedCourseScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      'Video-${index+1}',
+                                      'Quiz of $nameOfCourse',
                                       style: GoogleFonts.cairo(
                                         fontSize: 18,
                                       ),
                                     ),
                                     const Spacer(),
                                     IconButton(
-                                      icon: Icon( Icons.keyboard_arrow_right),
+                                      icon: const Icon(Icons.keyboard_arrow_right),
                                       onPressed: () {
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SelectedVideoScreen(cubit.alphabetListVideos[index],nameOfCourse,colorOfCourse,index,imageOfCourse)));
-                                        },
+                                        AdminCubit.get(context).getQuestions(nameOfCourse);
+                                        if(AdminCubit.get(context).questions.isNotEmpty)
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    QuizScreen()));
+                                      },
                                     )
                                   ],
                                 ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20,),
-
-                        ],);
-                    },
-                          separatorBuilder: (context,index){
-                        return SizedBox(height: 10,);
-                          },
-                          itemCount: cubit.alphabetListVideos.length,
+                              )),
                         ),
-                      ),
-
-
                     ],
                   ),
                 ),

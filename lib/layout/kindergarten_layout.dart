@@ -6,11 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
 import 'package:kindergarten1/modules/edit_user/edit_user_screen.dart';
+import 'package:kindergarten1/modules/login/login_screen.dart';
+import 'package:kindergarten1/shared/components/constants.dart';
 import 'package:line_icons/line_icon.dart';
+
+import '../shared/network/local/cache_helper.dart';
 
 
 class KindergartenLayout extends StatelessWidget {
-  const KindergartenLayout({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +39,21 @@ class KindergartenLayout extends StatelessWidget {
                     icon: LineIcon.userEdit(color: Colors.amber,size: 30,),
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>EditUserScreen()));
+                    },
+                  ),
+                  TextButton(
+                    child: Text('Logout',style: GoogleFonts.cairo(color: Colors.amber,fontWeight: FontWeight.bold),),
+                    onPressed: (){
+                      CacheHelper.removeData(key: 'userId')?.then((value) {
+                        if (value!) {
+                          userId = null;
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()),
+                                  (route) => false);
+                        }
+                      });
                     },
                   ),
                 ],
@@ -81,7 +101,7 @@ class KindergartenLayout extends StatelessWidget {
               backgroundColor: Colors.white,
               selectedItemColor: Colors.amber,
               unselectedItemColor: Colors.black,
-              items: const [
+              items:  [
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.home, size: 30), label: 'Home'),
                 BottomNavigationBarItem(
@@ -93,6 +113,10 @@ class KindergartenLayout extends StatelessWidget {
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.profile_circled, size: 30),
                     label: 'Profile'),
+                if(userModel?.isAdmin == true)
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.admin_panel_settings, size: 30),
+                    label: 'Admin'),
               ],
             ));
       },

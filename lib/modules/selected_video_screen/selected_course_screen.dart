@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
+import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -15,9 +16,8 @@ class SelectedVideoScreen extends StatelessWidget {
   final nameOfCourse;
   final colorOfCourse;
   final index;
-  final imageOfcourse;
 
-  SelectedVideoScreen(this.alphabetListVideo,this.nameOfCourse,this.colorOfCourse,this.index,this.imageOfcourse);
+  SelectedVideoScreen(this.alphabetListVideo, this.colorOfCourse, this.index, this.nameOfCourse );
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +27,24 @@ class SelectedVideoScreen extends StatelessWidget {
           statusBarIconBrightness: Brightness.dark),
       child: Scaffold(
         backgroundColor: colorOfCourse,
-        body: Container(
-          child: BlocProvider(
-            create: (BuildContext context) => PlayerCubit(alphabetListVideo),
-            child: BlocBuilder<PlayerCubit, YoutubePlayerController>(
-                builder: (context, controller) {
-              return Column(
-
+        body: BlocProvider(
+          create: (BuildContext context) => PlayerCubit( AdminCubit.get(context).urls[index]  ),
+          child: BlocBuilder<PlayerCubit, YoutubePlayerController>(
+              builder: (context, controller) {
+            return SingleChildScrollView(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if(nameOfCourse != 'الحروف الأبجدية')
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Container(
-
                       width: double.infinity,
                       color: colorOfCourse,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
+                        padding: const EdgeInsets.only(left: 8,top: 20),
+                        child:
+                        Text(
                           nameOfCourse,
                           style: GoogleFonts.poppins(
                             fontSize: 24,
@@ -54,75 +54,80 @@ class SelectedVideoScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 480,
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 200,
+
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 222.6,
                           width: double.infinity,
-                          decoration:BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(imageOfcourse),
-                              fit: BoxFit.fitWidth,
-                            )
-                          ) ,
+                          child: YoutubePlayer(
+                            controller: controller,
+                          ),
                         ),
-
-
-                        Align(
-                          alignment: AlignmentDirectional.bottomCenter,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 390,
+                          width: double.infinity,
+                          decoration: BoxDecoration(border: Border.all(width: 1)),
                           child: Padding(
                             padding: const EdgeInsets.all(20),
-                            child: Container(
-                              decoration: BoxDecoration(
-
-                                  color: colorOfCourse,
-                                  border: Border.all(width: 1),
-                                  borderRadius: BorderRadius.circular(30)),
-                              height: 300,
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Video-${index +1}',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-
-                                      ),
-                                    ),
-                                    SizedBox(height: 20,),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(30),
-                                          border: Border.all(width: 5)
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-
-                                        child: YoutubePlayer(
-                                          controller: controller,
+                            child: SingleChildScrollView(
+                              physics: BouncingScrollPhysics(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Video-${index + 1}',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 24,
                                         ),
                                       ),
-                                    )
-                                  ],
-                                ),
+
+
+                                    ],
+                                  ),
+                                  SizedBox(height: 5,),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 1,
+                                    color: Colors.black,
+                                  ),
+                                  SizedBox(height: 5,),
+                                  Text(
+                                    'Description :',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Text(
+                                    '${AdminCubit.get(context).description[index]}',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18,
+
+                                    ),
+                                  ),
+
+                                ],
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
 
+                    ],
+                  ),
                 ],
-              );
-            }),
-          ),
+              ),
+            );
+          }),
         ),
       ),
     );

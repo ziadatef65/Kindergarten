@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kindergarten1/modules/login/cubit/states.dart';
 
+import '../../../shared/components/constants.dart';
+
 class LoginCubit extends Cubit<LoginStates>
 {
   LoginCubit():super(LoginInitialState());
@@ -19,6 +21,7 @@ class LoginCubit extends Cubit<LoginStates>
         email: email,
         password: password,
     ).then((value) {
+      userId = value.user!.uid;
       emit(LoginSuccessState(value.user!.uid));
     }).catchError((error){
       emit(LoginErrorState(error.toString()));

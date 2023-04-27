@@ -12,43 +12,52 @@ import 'package:kindergarten1/modules/profile/profile_screen.dart';
 import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
 import 'package:kindergarten1/shared/components/constants.dart';
 import 'package:video_player/video_player.dart';
+
 import '../../models/courses_model.dart';
 import '../../models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-
+import '../../modules/admin/admin_dashboard.dart';
+import '../../modules/evaluation/evaluation_page.dart';
 
 class KindergartenCubit extends Cubit<KindergartenStates> {
-  KindergartenCubit() :super(KindergartenInitialState());
+  KindergartenCubit() : super(KindergartenInitialState());
 
   static KindergartenCubit get(context) => BlocProvider.of(context);
 
-
-  List <ObjectivesModel> objectivesList = [
-    ObjectivesModel('Numbers Course', 'assets/images/objectivesMath.jpg',
+  List<ObjectivesModel> objectivesList = [
+    ObjectivesModel(
+      'Numbers Course',
+      'assets/images/objectivesMath.jpg',
       const Color.fromRGBO(146, 218, 201, 10),
-      '. The ability to know numbers from 0 to 10 \n. The ability to write the number and know its form  \n. The ability to use numbers in future calculations',),
-    ObjectivesModel('Alphabet Course', 'assets/images/objectivesAlphabet.jpg',
+      '. The ability to know numbers from 0 to 10 \n. The ability to write the number and know its form  \n. The ability to use numbers in future calculations',
+    ),
+    ObjectivesModel(
+      'Alphabet Course',
+      'assets/images/objectivesAlphabet.jpg',
       CupertinoColors.white,
-      '. The ability to know numbers from 0 to 10 \n. The ability to write the number and know its form  \n. The ability to use numbers in future calculations',),
-    ObjectivesModel('Fruits Course', 'assets/images/objectivesFruits.jpg',
+      '. The ability to know numbers from 0 to 10 \n. The ability to write the number and know its form  \n. The ability to use numbers in future calculations',
+    ),
+    ObjectivesModel(
+      'Fruits Course',
+      'assets/images/objectivesFruits.jpg',
       const Color.fromRGBO(255, 251, 229, 10),
-      '. The ability to know numbers from 0 to 10 \n. The ability to write the number and know its form  \n. The ability to use numbers in future calculations',),
+      '. The ability to know numbers from 0 to 10 \n. The ability to write the number and know its form  \n. The ability to use numbers in future calculations',
+    ),
   ];
-
 
   int currentIndex = 0;
   List<Widget> screens = [
     HomeScreen(),
     CoursesScreen(),
     ProfileScreen(),
+    AdminDashboard(),
   ];
 
   void changeBottomNavBar(dynamic index) {
     currentIndex = index;
     emit(ChangeBottomNavState());
   }
-
 
   var boardController = PageController();
   bool isLast = false;
@@ -63,12 +72,12 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
     }
   }
 
-
   UserModel? userModel;
 
   void getUserData() {
     emit(GetUserLoadingState());
-    FirebaseFirestore.instance.collection('users')
+    FirebaseFirestore.instance
+        .collection('users')
         .doc(userId)
         .get()
         .then((dynamic value) {
@@ -84,8 +93,7 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
   File? profileImage;
   var picker = ImagePicker();
 
-  Future<void> getProfileImage() async
-  {
+  Future<void> getProfileImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       profileImage = File(pickedFile.path);
@@ -98,41 +106,33 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
 
   //end method
 
-
   //method to upload photo to storage
-
 
   void uploadProfileImage({
     required String name,
     required String gender,
     required String age,
   }) {
-    firebase_storage
-        .FirebaseStorage.instance
+    firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('users/${Uri
-        .file(profileImage!.path)
-        .pathSegments
-        .last}')
+        .child('users/${Uri.file(profileImage!.path).pathSegments.last}')
         .putFile(profileImage!)
         .then((value) {
       value.ref.getDownloadURL().then((dynamic value) {
         //emit(UploadProfileImageSuccessState());
         updateUser(
-            name: name,
-            gender: gender,
-            age: age,
+          name: name,
+          gender: gender,
+          age: age,
           image: value,
         );
       }).catchError((error) {
         emit(UploadProfileImageErrorState());
       });
-    })
-        .catchError((error) {
+    }).catchError((error) {
       emit(UploadProfileImageErrorState());
     });
   }
-
 
   void updateUser({
     required String name,
@@ -142,72 +142,72 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
   }) {
     emit(UserUpdateLoading());
 
-      UserModel model = UserModel(
-        childFullName: name,
-        gender: gender,
-        age: age,
-        image: image ?? userModel!.image,
-        email:userModel!.email,
-        userId:userModel!.userId,
-      );
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(userModel!.userId)
-          .update(model.toMap())
-          .then((value) {
-        getUserData();
-      }
-      )
-          .catchError((error) {
-        emit(UserUpdateError());
-      });
-    }
-
+    UserModel model = UserModel(
+      childFullName: name,
+      gender: gender,
+      age: age,
+      image: image ?? userModel!.image,
+      email: userModel!.email,
+      userId: userModel!.userId,
+      isAdmin: userModel!.isAdmin!,
+    );
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModel!.userId)
+        .update(model.toMap())
+        .then((value) {
+      getUserData();
+    }).catchError((error) {
+      emit(UserUpdateError());
+    });
+  }
 
   // list to get data to course item
   List<CoursesModel> coursesList = [
-    CoursesModel('Number Course', 'assets/images/objectivesMath.jpg', const Color.fromRGBO(146, 218, 201, 10)),
-    CoursesModel('Alphabet Course', 'assets/images/objectivesAlphabet.jpg', Colors.white),
-    CoursesModel('Fruits Course', 'assets/images/objectivesFruits.jpg', const Color.fromRGBO(255, 251, 229, 10)),
+    CoursesModel('Number Course', 'assets/images/objectivesMath.jpg',
+        const Color.fromRGBO(146, 218, 201, 10)),
+    CoursesModel('Alphabet Course', 'assets/images/objectivesAlphabet.jpg',
+        Colors.white),
+    CoursesModel('Fruits Course', 'assets/images/objectivesFruits.jpg',
+        const Color.fromRGBO(255, 251, 229, 10)),
   ];
+
   //end
 
 
 
-
-
-
-  List<String> alphabetListVideos = [
-    'hKEVDFIiqg4',
-    '3UE2hhKHh5Y',
-    'Gdt4IleVyA4',
-    '_EILnBlzC-Y',
-    'uRmw621DWak',
-    'xxYLTePonE8',
-    's9U_LUtQ_tw',
-    'g186xKVq9p8',
-    '4q6bKzMY3fw',
-    'hKiovTfNF9c',
+////
+  List<String> questions = [
+    "What is the purpose of your program, and how does it work?",
+    "Can you explain the main features and benefits of your program?",
+    "Is your program suitable for beginners or advanced users, or both?",
+    "What platforms and devices is your program compatible with?",
+    "How does your program compare to similar software in the market?",
+    "Are there any limitations or potential drawbacks to using your program?",
+    "Can you provide any case studies or success stories from users of your program?",
+    "What type of customer support is available for users of your program?",
+    "Is there a free trial or demo version available for users to test your program?",
+    "What is the pricing structure for your program, and are there any discounts or promotions currently available?",
   ];
+  int index = 0;
+  void changeQuestion(int currentIndex, context) {
+    if (currentIndex < questions.length - 1) {
+      index++;
+    }
+    emit(NextQuestionState());
+    if (index == questions.length - 1) {
+      index = questions.length - 1;
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => EvaluationPage()));
+    }
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  zeroOfIndex(){
+    index=0;
+    emit(ZeroIndex());
+  }
 
 
 
 }
+//////

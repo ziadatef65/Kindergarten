@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/kindergarten_layout.dart';
 import 'package:kindergarten1/modules/login/cubit/cubit.dart';
 import 'package:kindergarten1/modules/register/register_screen.dart';
 import 'package:kindergarten1/shared/components/components.dart';
+import 'package:kindergarten1/shared/components/constants.dart';
 import 'package:kindergarten1/shared/network/local/cache_helper.dart';
 import 'cubit/states.dart';
 
@@ -30,7 +32,10 @@ class LoginScreen extends StatelessWidget {
                   key: 'userId',
                   value: state.userId
               ).then((value) {
-                Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context)=>KindergartenLayout()), (route) => false);
+                userId = state.userId;
+                KindergartenCubit.get(context).getUserData();
+                KindergartenCubit.get(context).userModel!.image;
+                Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context)=>KindergartenLayout()), (route) => false,);
               });
             }
 

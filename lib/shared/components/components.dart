@@ -5,6 +5,8 @@ import 'package:kindergarten1/models/courses_model.dart';
 
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import '../../modules/admin/add_name_of_course.dart';
+
 //the default color of application
 defaultColor() => const Color.fromRGBO(17, 136, 204, 10);
 
@@ -110,21 +112,20 @@ courseItem({
               child: Text(
                 nameOfCourse,
                 style: GoogleFonts.cairo(
-                  fontSize: 24,
+                  fontSize: 20,
                 ),
               ),
             ),
             const Spacer(),
             Container(
-              width: 110,
-              height: 92,
+              width: 127,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(6),
                     bottomRight: Radius.circular(6)),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('${imageOfCourse}'),
+                  image: NetworkImage('${imageOfCourse}'),
                 ),
               ),
             ),
@@ -203,6 +204,100 @@ Color? chooseToastColor(ToastState state) {
               center: Text('${percent}'),
               circularStrokeCap: CircularStrokeCap.round,
             ),
+          ],
+        ),
+      ),
+    ),
+  );
+
+}
+itemOfDashboard(Color c,text,context ){
+  return Material(
+    borderRadius: BorderRadius.circular(10),
+    elevation: 5,
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(10),
+        color: c ,
+      ),
+      height: 480,
+      width: 330,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                  '${text}',
+                  style: GoogleFonts.cairo(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  )
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                height: 320,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(width: 2,),
+                ),
+                child:  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'some notes will need it: ',
+                          style: GoogleFonts.cairo(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )
+                      ),
+                      Text(
+                          ' - first add name of course and add image that realted to the content of course. \n - second add the description of video and the video url and not forget to add the title of video.',
+                          style: GoogleFonts.cairo(
+                            fontSize: 20,
+                          ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 60,
+                  width: 260,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> AddCourseName()));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Next',style: GoogleFonts.cairo(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w600),),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )
+
           ],
         ),
       ),

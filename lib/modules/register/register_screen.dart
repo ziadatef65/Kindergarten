@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/kindergarten_layout.dart';
 import 'package:kindergarten1/modules/register/cubit/cubit.dart';
 import 'package:kindergarten1/modules/register/cubit/states.dart';
+import 'package:kindergarten1/shared/components/constants.dart';
 
 import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
+import '../../shared/components/constants.dart';
+import '../../shared/components/constants.dart';
+import '../../shared/components/constants.dart';
+import '../../shared/network/local/cache_helper.dart';
 
 class RegisterScreen extends StatelessWidget {
 var  emailController = TextEditingController();
@@ -24,6 +31,12 @@ var formKey = GlobalKey<FormState>();
         listener: (context,state){
           if (state is CreateUserSuccessState)
             {
+              CacheHelper.saveData(key: 'userId', value: state.uId).then((value){
+                userId = state.uId;
+                KindergartenCubit.get(context).getUserData();
+
+
+              });
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>KindergartenLayout()), (route) => false);
             }
         },
@@ -154,6 +167,7 @@ var formKey = GlobalKey<FormState>();
                                                   gender: genderController.text,
                                                   password: passwordController.text,
                                               );
+
                                             }
                                         },
                                         child: Text(

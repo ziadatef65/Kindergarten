@@ -14,6 +14,7 @@ abstract class PlayerState {
   factory PlayerState.stopped(YoutubePlayerController controller) =>
       StoppedState(controller);
 
+
 }
 
 
@@ -38,6 +39,7 @@ class StoppedState extends PlayerState {
 
    StoppedState(this.controller);
 }
+
 
 
 
