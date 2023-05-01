@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
+import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
 import 'package:kindergarten1/modules/edit_user/edit_user_screen.dart';
 import 'package:kindergarten1/modules/login/login_screen.dart';
 import 'package:kindergarten1/shared/components/constants.dart';
@@ -44,6 +45,7 @@ class KindergartenLayout extends StatelessWidget {
                   TextButton(
                     child: Text('Logout',style: GoogleFonts.cairo(color: Colors.amber,fontWeight: FontWeight.bold),),
                     onPressed: (){
+                      AdminCubit.get(context).course.clear();
                       CacheHelper.removeData(key: 'userId')?.then((value) {
                         if (value!) {
                           userId = null;

@@ -5,11 +5,13 @@ import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/kindergarten_layout.dart';
 import 'package:kindergarten1/modules/login/login_screen.dart';
 import 'package:kindergarten1/modules/on_boarding/on_boarding_screen1.dart';
+import 'package:kindergarten1/modules/review/review_screen.dart';
 import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
 import 'package:kindergarten1/shared/block_observer.dart';
 import 'package:kindergarten1/shared/components/constants.dart';
 import 'package:kindergarten1/shared/network/local/cache_helper.dart';
 import 'firebase_options.dart';
+import 'model/cubit/cubit.dart';
 import 'modules/admin/cubit/cubit.dart';
 
 
@@ -59,8 +61,10 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) =>
                 PlayerCubit('')),
         BlocProvider(
-            create: (BuildContext context)=> AdminCubit()..getCourses()
+            create: (BuildContext context)=> AdminCubit()..getCourses(),
         ),
+        BlocProvider(create: (context)=> ImageClassificationCubit()),
+
 
       ],
       child: MaterialApp(

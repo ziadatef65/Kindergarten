@@ -63,6 +63,7 @@ void userCreate({
     email: email,
     image: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
     isAdmin: false,
+    scorePercentage: 0,
   );
 FirebaseFirestore.instance
     .collection('users')

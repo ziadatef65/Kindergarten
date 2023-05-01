@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../shared/components/components.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 import 'finish_add_course.dart';
@@ -18,7 +19,13 @@ class AddQuizQuestions extends StatelessWidget {
     var textController = TextEditingController();
     var formKey = GlobalKey<FormState>();
     return BlocConsumer<AdminCubit, AdminStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AddQuestionSuccessState ) {
+          showToast(text: 'The question has been added successfully',
+              state: ToastState.SUCCESS);
+          AdminCubit.get(context).clear(textController);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           body: Padding(

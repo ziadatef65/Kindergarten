@@ -55,7 +55,7 @@ dependencies:
   firebase_storage: ^11.0.15
   video_player: ^2.6.0
   youtube_player_flutter: ^8.1.2
-
+  tflite: ^1.1.2
 
 
 dev_dependencies:
@@ -80,6 +80,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/images/onBoardingScreen1.png
@@ -94,10 +95,13 @@ flutter:
      - assets/images/abcCourse.jpg
      - assets/images/objectivesMath.jpg
      - assets/images/objectivesAlphabet.jpg
+     - assets/images/defaultImage.jpg
      - assets/images/objectivesFruits.jpg
      - assets/images/arabicAlphabet.jpeg
      - assets/images/ss.png
      - assets/images/evaluationImage.png
+     - assets/labels.txt
+     - assets/model.tflite
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

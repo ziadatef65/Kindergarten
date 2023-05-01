@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
+import 'package:kindergarten1/model/cubit/cubit.dart';
 import 'package:kindergarten1/models/objectives_model.dart';
+import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
 import 'package:kindergarten1/modules/courses/courses_screen.dart';
 import 'package:kindergarten1/modules/home/home_screen.dart';
 import 'package:kindergarten1/modules/profile/profile_screen.dart';
@@ -170,6 +172,12 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
         Colors.white),
     CoursesModel('Fruits Course', 'assets/images/objectivesFruits.jpg',
         const Color.fromRGBO(255, 251, 229, 10)),
+    CoursesModel('Number Course', 'assets/images/objectivesMath.jpg',
+        const Color.fromRGBO(146, 218, 201, 10)),
+    CoursesModel('Alphabet Course', 'assets/images/objectivesAlphabet.jpg',
+        Colors.white),
+    CoursesModel('Fruits Course', 'assets/images/objectivesFruits.jpg',
+        const Color.fromRGBO(255, 251, 229, 10)),
   ];
 
   //end
@@ -177,37 +185,32 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
 
 
 ////
-  List<String> questions = [
-    "What is the purpose of your program, and how does it work?",
-    "Can you explain the main features and benefits of your program?",
-    "Is your program suitable for beginners or advanced users, or both?",
-    "What platforms and devices is your program compatible with?",
-    "How does your program compare to similar software in the market?",
-    "Are there any limitations or potential drawbacks to using your program?",
-    "Can you provide any case studies or success stories from users of your program?",
-    "What type of customer support is available for users of your program?",
-    "Is there a free trial or demo version available for users to test your program?",
-    "What is the pricing structure for your program, and are there any discounts or promotions currently available?",
-  ];
   int index = 0;
+
   void changeQuestion(int currentIndex, context) {
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex < AdminCubit.get(context).questions.length - 1) {
       index++;
+
     }
     emit(NextQuestionState());
-    if (index == questions.length - 1) {
-      index = questions.length - 1;
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => EvaluationPage()));
-    }
-  }
 
+  }
+//////
   zeroOfIndex(){
     index=0;
     emit(ZeroIndex());
   }
+//////
 
+void updateUserScore (value){
+    FirebaseFirestore.instance.collection('users').doc(userModel!.userId).update({'scorePercentage':value}).then((value) {
+emit(ScorePercentageSuccessState());
+    }).catchError((error){
+emit(ScorePercentageErrorState());
+    });
+}
+////////////
 
 
 }
-//////
+

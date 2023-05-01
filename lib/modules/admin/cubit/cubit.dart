@@ -169,6 +169,10 @@ class AdminCubit extends Cubit<AdminStates>{
       emit( GetUrlsErrorStat(error.toString()));
     });
   }
+
+
+
+
   ///////////////////////////////////////////
   List description = [];
   void getDescription(String? nameOfCourse) {
@@ -191,6 +195,8 @@ class AdminCubit extends Cubit<AdminStates>{
       );
     });
   }
+
+
   ///////////////////////////////////////////
   List questions = [];
   void getQuestions(String? nameOfCourse) {

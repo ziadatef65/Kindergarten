@@ -15,6 +15,7 @@ import '../../shared/components/constants.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/network/local/cache_helper.dart';
+import '../admin/cubit/cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
 var  emailController = TextEditingController();
@@ -167,7 +168,7 @@ var formKey = GlobalKey<FormState>();
                                                   gender: genderController.text,
                                                   password: passwordController.text,
                                               );
-
+                                              AdminCubit.get(context).getCourses();
                                             }
                                         },
                                         child: Text(

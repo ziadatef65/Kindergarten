@@ -6,9 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
 import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
-import 'package:kindergarten1/modules/quiz/quiz_screen.dart';
+import 'package:kindergarten1/modules/quiz/quizes_screen.dart';
 import 'package:kindergarten1/modules/selected_video_screen/selected_course_screen.dart';
 import 'package:line_icons/line_icon.dart';
+import '../../model/cubit/cubit.dart';
 import '../edit_user/edit_user_screen.dart';
 
 class SelectedCourseScreen extends StatelessWidget {
@@ -16,10 +17,12 @@ class SelectedCourseScreen extends StatelessWidget {
   final imageOfCourse;
   Color colorOfCourse;
 
+
   SelectedCourseScreen(
     this.nameOfCourse,
     this.imageOfCourse,
     this.colorOfCourse,
+
 
   );
 
@@ -169,8 +172,7 @@ class SelectedCourseScreen extends StatelessWidget {
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             SelectedVideoScreen(
-                                                              AdminCubit.get(
-                                                                      context).urls?[index],
+                                                            AdminCubit.get(context).urls?[index],
                                                               colorOfCourse,
                                                               index,
                                                               nameOfCourse,
@@ -224,8 +226,19 @@ class SelectedCourseScreen extends StatelessWidget {
                                     IconButton(
                                       icon: const Icon(Icons.keyboard_arrow_right),
                                       onPressed: () {
+                                        cubit.zeroOfIndex();
+                                        ImageClassificationCubit.get(context)
+                                            .labels
+                                            .clear();
+                                        ImageClassificationCubit.get(context)
+                                            .result
+                                            .clear();
+                                        ImageClassificationCubit.get(context)
+                                            .trueCounter = 0;
+                                        ImageClassificationCubit.get(context)
+                                            .falseCounter = 0;
                                         AdminCubit.get(context).getQuestions(nameOfCourse);
-                                        if(AdminCubit.get(context).questions.isNotEmpty)
+                                        if(AdminCubit.get(context).questions.length > 0)
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>

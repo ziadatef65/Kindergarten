@@ -30,9 +30,7 @@ class FinishAddCourse extends StatelessWidget {
         backgroundColor:const Color.fromRGBO(146, 218, 201, 10),
 
         onPressed: (){
-          AdminCubit.get(context).getCourses();
-          AdminCubit.get(context).getUrls(nameOfcourse);
-          AdminCubit.get(context).getDescription(nameOfcourse);
+
 
 
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>KindergartenLayout()), (route) => false);

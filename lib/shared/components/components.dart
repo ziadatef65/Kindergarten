@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/models/courses_model.dart';
+import 'package:line_icons/line_icon.dart';
 
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -182,28 +183,33 @@ Color? chooseToastColor(ToastState state) {
     elevation: 10,
     child: Container(
       width: 330,
-      height: 102,
+      height: 100,
       decoration: BoxDecoration(
         border: Border.all(width: 1),
         color: const Color.fromRGBO(255, 251,229,10),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Row(
+        padding: const EdgeInsets.only(top: 15,right: 15,left: 15),
+        child: Column(
           children: [
-            Text('Quiz “${nameOfQuiz}”',style: GoogleFonts.cairo(fontSize: 24),),
-            Spacer(),
-            CircularPercentIndicator(
-              animation: true,
-              progressColor: Color.fromRGBO(201, 236, 204, 10),
-              radius: 33,
-              lineWidth: 6,
-              animationDuration: 4000,
-              percent: percentOfProgressOfCourse,
-              center: Text('${percent}'),
-              circularStrokeCap: CircularStrokeCap.round,
+            Row(
+              children: [
+                Text('Quiz “${nameOfQuiz}”',style: GoogleFonts.cairo(fontSize: 24),),
+                Spacer(),
+                CircularPercentIndicator(
+                  animation: true,
+                  progressColor: Color.fromRGBO(201, 236, 204, 10),
+                  radius: 33,
+                  lineWidth: 6,
+                  animationDuration: 4000,
+                  percent: percentOfProgressOfCourse,
+                  center: Text('${percent}'),
+                  circularStrokeCap: CircularStrokeCap.round,
+                ),
+              ],
             ),
+
           ],
         ),
       ),

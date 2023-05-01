@@ -28,10 +28,10 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   child: Container(
                     width: 370,
-                    height: 590,
+                    height: 570,
                     decoration: BoxDecoration(
                       border: Border.all(width: 1),
-                      color: Color.fromRGBO(201, 236, 204, 10),
+                      color: const Color.fromRGBO(201, 236, 204, 10),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
@@ -79,22 +79,36 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(height: 10,),
                           quizItem(
                               nameOfQuiz:"Alphabet" ,
-                              percentOfProgressOfCourse: 0.85,
-                            percent: '85.0%',
+                              percentOfProgressOfCourse: (userModel.scorePercentage! * 0.01),
+                              percent: '${userModel.scorePercentage!.toInt()}%',
                           ),
                           SizedBox(height: 10,),
-                          quizItem(
-                            nameOfQuiz:"Numbers" ,
-                            percentOfProgressOfCourse: 0.50,
-                            percent: '50.0%',
+                          InkWell(
+                            onTap: (){},
+                            child: Material(
+                              elevation: 10,
+                              borderRadius: BorderRadius.circular(6),
+                              child: Container(
+                                width: double.infinity,
+                                height: 75,
+                                decoration: BoxDecoration(
+                                  color:const Color.fromRGBO(255, 251,229,10),
+                                  border: Border.all(
+                                  ),
+                                  borderRadius: BorderRadius.circular(6)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Row(
+                                    children: [Text('Reports',style: GoogleFonts.cairo(fontSize: 24,),),
+                                    Spacer(),
+                                     Icon(Icons.family_restroom) ,
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          SizedBox(height: 10,),
-                          quizItem(
-                            nameOfQuiz:"Fruits" ,
-                            percentOfProgressOfCourse: 1,
-                            percent: '100.0%',
-                          ),
-
                         ],
                       ),
                     ),

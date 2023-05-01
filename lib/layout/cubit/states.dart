@@ -39,4 +39,6 @@ class FinishQuizState extends KindergartenStates{}
 class ZeroIndex extends KindergartenStates{}
 //
 class changeState extends KindergartenStates{}
-
+//
+class ScorePercentageSuccessState extends KindergartenStates{}
+class ScorePercentageErrorState extends KindergartenStates{}

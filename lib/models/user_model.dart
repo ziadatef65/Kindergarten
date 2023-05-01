@@ -6,6 +6,7 @@ class UserModel {
   String? age;
   String? image;
   bool? isAdmin;
+  double? scorePercentage;
 
 
   UserModel({
@@ -16,6 +17,7 @@ class UserModel {
     this.gender,
     this.userId,
     this.isAdmin,
+    this.scorePercentage,
 
   });
 
@@ -27,6 +29,7 @@ class UserModel {
     userId = json['userId'];
     image = json['image'];
     isAdmin = json['isAdmin'];
+    scorePercentage = json['scorePercentage'];
 
   }
 
@@ -41,7 +44,7 @@ class UserModel {
       'userId':userId,
       'image':image,
       'isAdmin':isAdmin,
-
+      'scorePercentage':scorePercentage,
     };
   }
 

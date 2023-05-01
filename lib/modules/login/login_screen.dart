@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/kindergarten_layout.dart';
+import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
 import 'package:kindergarten1/modules/login/cubit/cubit.dart';
 import 'package:kindergarten1/modules/register/register_screen.dart';
 import 'package:kindergarten1/shared/components/components.dart';
@@ -149,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                                                 email: emailController.text,
                                                 password: passwordController.text,
                                             );
-
+                                            AdminCubit.get(context).getCourses();
                                           }
 
                                       },
