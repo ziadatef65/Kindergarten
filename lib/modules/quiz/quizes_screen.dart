@@ -101,14 +101,14 @@ class QuizScreen extends StatelessWidget {
                             Text(
                               'Question-${cubit.index+1}:',
                               style: GoogleFonts.cairo(
-                                textStyle: TextStyle(fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
+                                  textStyle: TextStyle(fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
 
                             ),
                             Expanded(
                               child: Text(
-                               AdminCubit.get(context).questions[cubit.index],
+                                AdminCubit.get(context).questions[cubit.index],
                                 style: const TextStyle(
                                     fontSize: 22,
                                     color: Colors.white,
@@ -120,7 +120,7 @@ class QuizScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                 const SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
@@ -142,35 +142,35 @@ class QuizScreen extends StatelessWidget {
                         ),
                       ),
                       if(cubit.index < cubit.questions.length-1)
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: InkWell(
-                          onTap: () {
-                            cubit.changeQuestion(index,context);
-                            index = cubit.index;
-                            print(index);
-                          },
-                          child: Container(
-                            height: 45,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(' Upload photo',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold)),
-                                Icon(LineIcons.upload)
-                              ],
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: InkWell(
+                            onTap: () {
+                              cubit.changeQuestion(index,context);
+                              index = cubit.index;
+                              print(index);
+                            },
+                            child: Container(
+                              height: 45,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(' Upload photo',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  Icon(LineIcons.upload)
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
                     ]),
                   )
                 ],

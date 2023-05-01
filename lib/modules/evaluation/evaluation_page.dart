@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kindergarten1/modules/quiz/quiz_screen.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../layout/cubit/states.dart';
+import '../quiz/quizes_screen.dart';
 
 
 

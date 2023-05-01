@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
 import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
-import 'package:kindergarten1/modules/quiz/quiz_screen.dart';
+import 'package:kindergarten1/modules/quiz/quizes_screen.dart';
 import 'package:kindergarten1/modules/selected_video_screen/selected_course_screen.dart';
 import 'package:line_icons/line_icon.dart';
 import '../edit_user/edit_user_screen.dart';
