@@ -42,10 +42,13 @@ Make sure you have Flutter and Dart installed on your machine before running the
 This project is a collaborative effort between me and my colleagues as part of our graduation project for university. We have worked together to develop this educational kids app, leveraging our diverse skills and expertise to create a high-quality and engaging learning experience for children.
 Team Members
 
-    Ziad Atef - Flutter Developer
-    Aya Ayed - AI Model Developer
-    Omnia Salem - Flutter Developer
-    Mostafa Magdy - AI Model Developer
+Ziad Atef - Flutter Developer
+
+Aya Ayed - AI Model Developer
+
+Omnia Salem - Flutter Developer
+
+Mostafa Magdy - AI Model Developer
     
 # Screens From Our App
 ![iPhone 13 Pro](https://github.com/ziadatef65/Kindergarten/assets/128000453/e626ca69-08e5-4e30-ae4e-4561acc3a656)
