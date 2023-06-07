@@ -1,16 +1,9 @@
-# kindergarten1
+#Kindergarten Educational App
+This is a mobile application developed using Flutter that aims to provide educational content to children. The app allows children to watch educational videos and participate in quizzes at the end of each course. The quizzes are designed to test their understanding of the concepts covered in the videos. An artificial intelligence model is used to evaluate their answers and determine whether they are correct or incorrect.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Features
+Engaging and interactive educational videos for children.
+Quizzes to reinforce learning and assess comprehension.
+Artificial intelligence model to evaluate quiz answers.
+Parental reporting system to track children's progress.
+Detailed reports on the child's performance, including scores, correct and incorrect answers, and overall progress.
