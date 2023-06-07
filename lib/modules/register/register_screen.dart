@@ -69,7 +69,7 @@ var formKey = GlobalKey<FormState>();
                               Container(
                                 width: 110,
                                 height: 110,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('assets/images/appLogo.png'),
                                   ),
@@ -117,7 +117,7 @@ var formKey = GlobalKey<FormState>();
                                 Material(
                                   child: defaultTextFromField(
                                     controller: ageController,
-                                    typeOfKeyboard: TextInputType.numberWithOptions(),
+                                    typeOfKeyboard: const TextInputType.numberWithOptions(),
                                     textOfLabel: 'Age',
                                     textIfNotValidate: 'Age must not empty',
                                   ),
@@ -146,7 +146,7 @@ var formKey = GlobalKey<FormState>();
                                   elevation: 15,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                SizedBox(height: 80,),
+                                const SizedBox(height: 80,),
                                 Center(
                                   child: Material(
                                     elevation: 20,
@@ -185,7 +185,7 @@ var formKey = GlobalKey<FormState>();
                                   ),
                                 ),
                                 if(state is RegisterLoadingState)
-                                  LinearProgressIndicator(),
+                                  const LinearProgressIndicator(),
                               ],
                             ),
                           )

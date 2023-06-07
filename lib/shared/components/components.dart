@@ -1,11 +1,9 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kindergarten1/models/courses_model.dart';
-import 'package:line_icons/line_icon.dart';
-
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
 import '../../modules/admin/add_name_of_course.dart';
 
 //the default color of application
@@ -50,7 +48,7 @@ defaultTextFromField({
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         fillColor: Colors.white,
         filled: true,
-        contentPadding: EdgeInsets.all(20),
+        contentPadding: const EdgeInsets.all(20),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10),
@@ -126,7 +124,7 @@ courseItem({
                     bottomRight: Radius.circular(6)),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage('${imageOfCourse}'),
+                  image: NetworkImage(imageOfCourse),
                 ),
               ),
             ),
@@ -195,16 +193,16 @@ Color? chooseToastColor(ToastState state) {
           children: [
             Row(
               children: [
-                Text('Quiz “${nameOfQuiz}”',style: GoogleFonts.cairo(fontSize: 24),),
-                Spacer(),
+                Text('Quiz “$nameOfQuiz”',style: GoogleFonts.cairo(fontSize: 24),),
+                const Spacer(),
                 CircularPercentIndicator(
                   animation: true,
-                  progressColor: Color.fromRGBO(201, 236, 204, 10),
+                  progressColor: const Color.fromRGBO(201, 236, 204, 10),
                   radius: 33,
                   lineWidth: 6,
                   animationDuration: 4000,
                   percent: percentOfProgressOfCourse,
-                  center: Text('${percent}'),
+                  center: Text(percent),
                   circularStrokeCap: CircularStrokeCap.round,
                 ),
               ],
@@ -237,7 +235,7 @@ itemOfDashboard(Color c,text,context ){
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                  '${text}',
+                  '$text',
                   style: GoogleFonts.cairo(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -266,7 +264,7 @@ itemOfDashboard(Color c,text,context ){
                           )
                       ),
                       Text(
-                          ' - first add name of course and add image that realted to the content of course. \n - second add the description of video and the video url and not forget to add the title of video.',
+                          ' - first add name of course and add image that related to the content of course. \n - second add the description of video and the video url and not forget to add the title of video.',
                           style: GoogleFonts.cairo(
                             fontSize: 20,
                           ),
@@ -276,7 +274,7 @@ itemOfDashboard(Color c,text,context ){
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

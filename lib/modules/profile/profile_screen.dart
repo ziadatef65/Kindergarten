@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindergarten1/layout/cubit/cubit.dart';
+import 'package:kindergarten1/modules/reports/reports_screen.dart';
 import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
 import 'package:kindergarten1/shared/components/components.dart';
 
@@ -56,19 +57,19 @@ class ProfileScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text('Father Name: ',style:GoogleFonts.cairo(fontSize: 24,color: Colors.amber),),
-                                        Text('${userModel!.childFullName!.split(" ").elementAt(1).toUpperCase()}',style:GoogleFonts.cairo(fontSize:18,)),
+                                        Text(userModel!.childFullName!.split(" ").elementAt(1).toUpperCase(),style:GoogleFonts.cairo(fontSize:18,)),
                                       ],
                                     ),
                                     Row(
                                       children: [
                                         Text('Child Name: ',style:GoogleFonts.cairo(fontSize: 24,color: Colors.amber),),
-                                        Text('${userModel!.childFullName!.split(" ").elementAt(0).toUpperCase()}',style:GoogleFonts.cairo(fontSize:20,)),
+                                        Text(userModel!.childFullName!.split(" ").elementAt(0).toUpperCase(),style:GoogleFonts.cairo(fontSize:20,)),
                                       ],
                                     ),
                                     Row(
                                       children: [
                                         Text('Email: ',style:GoogleFonts.cairo(fontSize: 24,color: Colors.amber),),
-                                        Container(height: 40,width:200,child: Tooltip(message: '${userModel!.email}' ,child: Text('${userModel!.email}',overflow: TextOverflow.ellipsis,style:GoogleFonts.cairo(fontSize:20,)))),
+                                        SizedBox(height: 40,width:200,child: Tooltip(message: '${userModel!.email}' ,child: Text('${userModel!.email}',overflow: TextOverflow.ellipsis,style:GoogleFonts.cairo(fontSize:20,)))),
                                       ],
                                     ),
                                   ],
@@ -76,15 +77,17 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           quizItem(
                               nameOfQuiz:"Alphabet" ,
                               percentOfProgressOfCourse: (userModel.scorePercentage! * 0.01),
                               percent: '${userModel.scorePercentage!.toInt()}%',
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           InkWell(
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> const ReportsScreen()));
+                            },
                             child: Material(
                               elevation: 10,
                               borderRadius: BorderRadius.circular(6),
@@ -101,8 +104,8 @@ class ProfileScreen extends StatelessWidget {
                                   padding: const EdgeInsets.all(15),
                                   child: Row(
                                     children: [Text('Reports',style: GoogleFonts.cairo(fontSize: 24,),),
-                                    Spacer(),
-                                     Icon(Icons.family_restroom) ,
+                                    const Spacer(),
+                                     const Icon(Icons.family_restroom) ,
                                     ],
                                   ),
                                 ),

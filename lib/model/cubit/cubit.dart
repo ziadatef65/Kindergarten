@@ -1,24 +1,42 @@
 import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kindergarten1/model/cubit/states.dart';
+import 'package:kindergarten1/shared/components/constants.dart';
 import 'package:tflite/tflite.dart';
 
 
 
 class ImageClassificationCubit extends Cubit<ImageClassificationState> {
+
   List<String> labels = [];
   List<bool> result =[] ;
 
   int trueCounter=0;
   int falseCounter=0;
 
+//////////////////////
+
+   updateResultsList(List<bool> myList) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    DocumentReference userDoc = users.doc(userId);
+    List<dynamic> boolList = myList.map((dynamic value) => value ? true : false).toList();
+
+    await userDoc.update({
+      'results': myList
+    },);
+  }
   ///////////////////////////
    compareLists(List<String> list1, List<String> list2) {
     for (int i = 0; i < list1.length; i++) {
       if (list1[i] == list2[i]) {
         result.add(true);
+
       } else {
         result.add(false);
+
       }
       for (int i = 0; i < result.length; i++) {
         if (result[i]) {
@@ -28,7 +46,9 @@ class ImageClassificationCubit extends Cubit<ImageClassificationState> {
         }
       }
     return result;
+
     }
+
 }
   ///////////////////////////
 

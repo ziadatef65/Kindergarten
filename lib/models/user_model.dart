@@ -7,6 +7,7 @@ class UserModel {
   String? image;
   bool? isAdmin;
   double? scorePercentage;
+  List? results;
 
 
   UserModel({
@@ -18,6 +19,7 @@ class UserModel {
     this.userId,
     this.isAdmin,
     this.scorePercentage,
+    this.results,
 
   });
 
@@ -30,6 +32,8 @@ class UserModel {
     image = json['image'];
     isAdmin = json['isAdmin'];
     scorePercentage = json['scorePercentage'];
+    results = json['results'];
+
 
   }
 
@@ -45,6 +49,7 @@ class UserModel {
       'image':image,
       'isAdmin':isAdmin,
       'scorePercentage':scorePercentage,
+      'results':results,
     };
   }
 

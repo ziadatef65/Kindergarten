@@ -8,7 +8,7 @@ class PlayerCubit extends Cubit<YoutubePlayerController> {
 
   PlayerCubit(dynamic videoId)
       : super(YoutubePlayerController(
-          initialVideoId: '${videoId}',
+          initialVideoId: '$videoId',
           flags: const YoutubePlayerFlags(
             autoPlay: true,
             controlsVisibleAtStart: true,

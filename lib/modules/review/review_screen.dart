@@ -121,7 +121,7 @@ class ReviewScreen extends StatelessWidget {
                           height: 80,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: list[index] == false ? Color.fromRGBO(255, 204, 203, 10):Color.fromRGBO(146, 218, 201, 10),
+                            color: list[index] == false ? const Color.fromRGBO(255, 204, 203, 10):const Color.fromRGBO(146, 218, 201, 10),
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(),
                           ),
@@ -131,7 +131,7 @@ class ReviewScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(20),
                                 child:    Text('Question-${index+1}',style: GoogleFonts.aBeeZee(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Padding(
                                 padding: const EdgeInsets.all(20),
                                 child: Text('${list[index]}',style: GoogleFonts.aBeeZee(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
@@ -141,7 +141,7 @@ class ReviewScreen extends StatelessWidget {
                         );
 
                       },
-                      separatorBuilder:(context,index) => SizedBox(height: 15),
+                      separatorBuilder:(context,index) => const SizedBox(height: 15),
                       itemCount:list.length,
                   ),
                 ),

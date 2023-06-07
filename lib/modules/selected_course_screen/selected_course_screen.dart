@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +24,7 @@ class SelectedCourseScreen extends StatelessWidget {
     this.nameOfCourse,
     this.imageOfCourse,
     this.colorOfCourse,
+      {super.key}
 
 
   );
@@ -172,7 +175,7 @@ class SelectedCourseScreen extends StatelessWidget {
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             SelectedVideoScreen(
-                                                            AdminCubit.get(context).urls?[index],
+                                                            AdminCubit.get(context).urls[index],
                                                               colorOfCourse,
                                                               index,
                                                               nameOfCourse,
@@ -238,11 +241,12 @@ class SelectedCourseScreen extends StatelessWidget {
                                         ImageClassificationCubit.get(context)
                                             .falseCounter = 0;
                                         AdminCubit.get(context).getQuestions(nameOfCourse);
-                                        if(AdminCubit.get(context).questions.length > 0)
-                                        Navigator.of(context).push(
+                                        if(AdminCubit.get(context).questions.length > 0) {
+                                          Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     QuizScreen()));
+                                        }
                                       },
                                     )
                                   ],

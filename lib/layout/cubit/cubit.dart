@@ -5,22 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten1/layout/cubit/states.dart';
-import 'package:kindergarten1/model/cubit/cubit.dart';
 import 'package:kindergarten1/models/objectives_model.dart';
 import 'package:kindergarten1/modules/admin/cubit/cubit.dart';
 import 'package:kindergarten1/modules/courses/courses_screen.dart';
+import 'package:kindergarten1/modules/explore_object/Explore%20object.dart';
 import 'package:kindergarten1/modules/home/home_screen.dart';
 import 'package:kindergarten1/modules/profile/profile_screen.dart';
-import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
 import 'package:kindergarten1/shared/components/constants.dart';
-import 'package:video_player/video_player.dart';
 
 import '../../models/courses_model.dart';
 import '../../models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../modules/admin/admin_dashboard.dart';
-import '../../modules/evaluation/evaluation_page.dart';
 
 class KindergartenCubit extends Cubit<KindergartenStates> {
   KindergartenCubit() : super(KindergartenInitialState());
@@ -53,6 +50,7 @@ class KindergartenCubit extends Cubit<KindergartenStates> {
     HomeScreen(),
     CoursesScreen(),
     ProfileScreen(),
+    ExploreObject(),
     AdminDashboard(),
   ];
 

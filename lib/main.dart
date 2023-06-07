@@ -5,7 +5,6 @@ import 'package:kindergarten1/layout/cubit/cubit.dart';
 import 'package:kindergarten1/layout/kindergarten_layout.dart';
 import 'package:kindergarten1/modules/login/login_screen.dart';
 import 'package:kindergarten1/modules/on_boarding/on_boarding_screen1.dart';
-import 'package:kindergarten1/modules/review/review_screen.dart';
 import 'package:kindergarten1/modules/selected_course_screen/cubit/cubit.dart';
 import 'package:kindergarten1/shared/block_observer.dart';
 import 'package:kindergarten1/shared/components/constants.dart';
@@ -23,7 +22,6 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-  String childFullNames;
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
   userId = CacheHelper.getData(key: 'userId');
   Widget widget;
@@ -48,7 +46,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final Widget? startWidget;
 
-  MyApp({this.startWidget});
+  const MyApp({super.key, this.startWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +69,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(),
-        home:startWidget,
+        home: startWidget,
         // startWidget,
       ),
     );

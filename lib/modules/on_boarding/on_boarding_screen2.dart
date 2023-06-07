@@ -155,13 +155,13 @@ and make a list of type of Boarding Model
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image(
-            image: AssetImage('${model.image}'),
+            image: AssetImage(model.image),
           ),
           const SizedBox(
             height: 30,
           ),
           Text(
-            '${model.text}',
+            model.text,
             style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
           ),
         ],

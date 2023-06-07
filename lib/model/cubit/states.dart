@@ -20,5 +20,9 @@ class ImageClassificationError extends ImageClassificationState {
 class TrueCounterIncrease extends ImageClassificationState {}
 
 class FalseCounterIncrease extends ImageClassificationState {}
+//////////////////////
+class EditResultSuccessState extends ImageClassificationState {}
+
+class EditResultErrorState extends ImageClassificationState {}
 
 ////////////

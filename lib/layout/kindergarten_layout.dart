@@ -104,19 +104,22 @@ class KindergartenLayout extends StatelessWidget {
               selectedItemColor: Colors.amber,
               unselectedItemColor: Colors.black,
               items:  [
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.home, size: 30), label: 'Home'),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                     icon: Icon(
                       Icons.video_collection_sharp,
                       size: 30,
                     ),
                     label: 'Courses'),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.profile_circled, size: 30),
                     label: 'Profile'),
+                const BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller,size: 30,),
+                label: 'Explore',
+                ),
                 if(userModel?.isAdmin == true)
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                     icon: Icon(Icons.admin_panel_settings, size: 30),
                     label: 'Admin'),
               ],
